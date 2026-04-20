@@ -1,0 +1,21 @@
+name: Build Android APK
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build with Buildozer
+        uses: ArtemSerebriakov/buildozer-action@v1
+        with:
+          buildozer_version: master
+          python_version: 3.11
+          build_type: debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: Faisal-Bird-Package
+          path: bin/*.apk
